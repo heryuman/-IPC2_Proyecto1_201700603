@@ -27,6 +27,10 @@ class LeerXml(object):
         if Lmatrices.getVacio()==False:
             Lmatrices.VaciarLista()
             LBinarais.VaciarLista()
+<<<<<<< HEAD
+=======
+            LMatResult.VaciarLista()
+>>>>>>> Release3
 
         #nombre = doc.getElementsByTagName("nombre")[1]
         #print(nombre.firstChild.data)

@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <Matrices>
   <!--Generado por Selvin-->
+<<<<<<< HEAD
   <matriz nombre="matriz_n_1_salida" n="6" m="15" g="6">
     <dato x="1" y="1">15</dato>
     <dato x="1" y="2">12</dato>
@@ -143,5 +144,20 @@
     <dato x="3" y="3">4</dato>
     <dato x="3" y="4">5</dato>
     <dato x="3" y="5">6</dato>
+=======
+  <matriz nombre="Ejemplo_salida" n="3" m="4" g="3">
+    <dato x="1" y="1">7</dato>
+    <dato x="1" y="2">10</dato>
+    <dato x="1" y="3">0</dato>
+    <dato x="1" y="4">10</dato>
+    <dato x="2" y="1">0</dato>
+    <dato x="2" y="2">0</dato>
+    <dato x="2" y="3">12</dato>
+    <dato x="2" y="4">5</dato>
+    <dato x="3" y="1">1</dato>
+    <dato x="3" y="2">0</dato>
+    <dato x="3" y="3">1</dato>
+    <dato x="3" y="4">5</dato>
+>>>>>>> Release3
   </matriz>
 </Matrices>
