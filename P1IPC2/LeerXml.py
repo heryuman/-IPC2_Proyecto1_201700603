@@ -1,4 +1,8 @@
 from xml.dom import minidom
+from xml.etree.ElementTree import Element, SubElement, Comment
+import os
+from ElementTree_pretty import prettify
+from  graphviz import Digraph
 import ListaCircularSimple
 import Matriz
 
@@ -20,6 +24,9 @@ class LeerXml(object):
         # doc = minidom.parse("/ruta/datos.xml")
 
         doc = minidom.parse(self.getRuta())
+        if Lmatrices.getVacio()==False:
+            Lmatrices.VaciarLista()
+            LBinarais.VaciarLista()
 
         #nombre = doc.getElementsByTagName("nombre")[1]
         #print(nombre.firstChild.data)
@@ -30,18 +37,15 @@ class LeerXml(object):
         for matriz in matrices:
 
             nombrematriz = matriz.getAttribute("nombre")
-            fila= matriz.getAttribute("m")
-            columna = matriz.getAttribute("n")
+            columna= matriz.getAttribute("m")
+            fila = matriz.getAttribute("n")
             MatrixN = Matriz.matrix(int(fila),int(columna),nombrematriz)
             Lmatrices.addNodoalFinal(MatrixN)
 
 
 
             datos= matriz.getElementsByTagName("dato")
-           # print("nombre:%s " % nombrematriz)
-           # print("Filas:%s"% fila)
-           # print("columnas:%s" % columna)
-           # print()
+
 
             for dato in datos:
 
@@ -50,25 +54,14 @@ class LeerXml(object):
                 valor = dato.firstChild.data
                 Lmatrices.getLista(CONTMAT).insertMatriz(valor)
 
-
-               # LMAT[CONTMAT].insertMatriz(valor)
-               # print("tam matrix ",MatrixN.getNumFila()," X ",MatrixN.getNumColumna())
-                #print("posX:%s" % posx)
-                #print("posY:%s" % posy)
-               # print("valor:%s" % valor)
-
-
             CONTMAT += 1
 
-            #print("Nombre: ",MatrixN.getNombreMatriz(), "m = ", MatrixN.getNumFila(), "n= ",MatrixN.getNumColumna() )
-            #MatrixN.mostrarmatriz()
-           # print("*/*/*/*/*/*/*FIN DE MATRIZ/*/*/*/*/*/")
+
             print()
 
-            #Lmatrices.addNodoalFinal(MatrixN)
-           # print("contmat",CONTMAT)
+
         CONTMAT=0
-       # print("tamanio Lista matrices ",Lmatrices.tamanio())
+
 
     def imprimirLmatrices(self):
         for i in range(Lmatrices.tamanio()):
@@ -97,45 +90,6 @@ class LeerXml(object):
 
             LBinarais.addNodoalFinal(NuevaMatBinaria)
 
-    def comparandoBinarias(self):
-
-
-        for i in range(LBinarais.tamanio()):
-            iguales = False
-            FilaComparar = []
-            it = 0
-            NmatrizR = Matriz.matrix(int(LBinarais.getLista(i).getNumFila()),
-                                     int(LBinarais.getLista(i).getNumColumna()),
-                                     LBinarais.getLista(i).getNombreMatriz())
-            for j in range(LBinarais.getLista(i).getNumFila()):
-
-                for k in range(LBinarais.getLista(i).getNumColumna()):
-                    FilaComparar.append(LBinarais.getLista(i).mostrarenfilaycolumna(j, k))
-                it += 1
-                pos = j
-                poa2=0
-                print(FilaComparar)
-                # print("it val",it)
-
-                for m in range(it, LBinarais.getLista(i).getNumFila()):
-                    iguales = True
-                    for n in range(LBinarais.getLista(i).getNumColumna()):
-
-                        if LBinarais.getLista(i).mostrarenfilaycolumna(m, n) != FilaComparar[n]:
-                            iguales = False
-
-                    if iguales == True:
-                        print("la fila ",pos+1," y la fila ", m + 1, " son iguales? ", iguales)
-                        for s in range(Lmatrices.getLista(i).getNumColumna()):
-                            suma = int(Lmatrices.getLista(i).mostrarenfilaycolumna(pos,s))+int(Lmatrices.getLista(i).mostrarenfilaycolumna(m,s))
-
-                FilaComparar.clear()
-
-
-
-
-
-
 
 
 
@@ -148,100 +102,291 @@ class LeerXml(object):
 
            print("*/*/*/*/*/*/*/*/*/*/*/*/")
 
-        #LBinarais.DelLista(0)
 
 
 
-    def GetFilas(self,posicion):
-        fila= int(Lmatrices.getLista(posicion).getNumFila())
-        return fila
-
-    def GetColumnas(self,posicion):
-        columna = int(Lmatrices.getLista(posicion).getNumColumna())
-        return columna
-
-    def ObteniendoPatrones(self, posicion):
-        Lpatrones = []
-        patron=""
-        for j in range(LBinarais.getLista(posicion).getNumFila()):
-            for k in range(LBinarais.getLista(posicion).getNumColumna()):
-                patron = patron + str(LBinarais.getLista(posicion).mostrarenfilaycolumna(j, k))
-
-            Lpatrones.append(patron)
-            patron = ""
+    def comparandoBinarias(self):
 
 
-        #Lpatrones.MostrarListaPrimeroaUltimo()
-        return Lpatrones
+        for i in range(LBinarais.tamanio()):
+            iguales = False
 
 
-    def comparandoPatrones2(self):
-        for i in range(Lmatrices.tamanio()):
-            jt=len(self.ObteniendoPatrones(i))
-            kt=len(self.ObteniendoPatrones(i))
-            kdel=0
-            for j in    range(jt):
-                val1=0
-                val2=0
-                lmatch=ListaCircularSimple.ListaCircularSimpl()
-                for k in range(kt):
-                    if self.ObteniendoPatrones(i)[j]== self.ObteniendoPatrones(i)[k] and j!=k:
-                        val1=j
-                        val2=k
-                        #print("en pat2",self.ObteniendoPatrones(i)[j])
-                        if lmatch.existe(val2)== False:
-                            lmatch.addNodoalFinal(val2)
-                            self.ObteniendoPatrones(i).pop(val2)
+            FilaComparar = []
+            flags=[]
+            lparecidos = ListaCircularSimple.ListaCircularSimpl()
+            ldiferentes=ListaCircularSimple.ListaCircularSimpl()
+            it = 0
+            seusoPos = None
+            NmatrizR = Matriz.matrix(int(LBinarais.getLista(i).getNumFila()),int(LBinarais.getLista(i).getNumColumna()),LBinarais.getLista(i).getNombreMatriz())
+            for f in range(LBinarais.getLista(i).getNumFila()):
+                flags.append(False)
+            for j in range(LBinarais.getLista(i).getNumFila()):
 
-                if lmatch.existe(val1) == False:
-                    lmatch.addNodoalFinal(val1)
-                lmatch.MostrarListaPrimeroaUltimo()
-                print("akjsfklasdf")
-            self.ObteniendoPatrones(i).pop(val1)
-            LindicesaSumar.addNodoalFinal(lmatch)
+                if flags[j]==False:
+                    for k in range(LBinarais.getLista(i).getNumColumna()):
+
+                        FilaComparar.append(LBinarais.getLista(i).mostrarenfilaycolumna(j, k))
+                else:
+                    ldiferentes.addNodoalFinal(j)
 
 
 
 
+                it += 1
+                pos = j
+                poa2=0
+
+                # print("it val",it)
+                seusoPos = None
+                #print(len(FilaComparar))
+                if len(FilaComparar)>0:
+                    for m in range(it, LBinarais.getLista(i).getNumFila()):
+                        iguales = True
+
+                        for n in range(LBinarais.getLista(i).getNumColumna()):
+
+                            if LBinarais.getLista(i).mostrarenfilaycolumna(m, n) != FilaComparar[n]:
+                                iguales = False
+
+                        if iguales == True :
+                           # print("la fila ", pos + 1, " y la fila ", m + 1, " son iguales? ", iguales)
+                            flags[m]=True
+                            flags[pos]=True
+                            if lparecidos.existe(str(m))==False:
+                                lparecidos.addNodoalFinal(m)
+                                if lparecidos.existe(str(pos))== False:
+                                    lparecidos.addNodoalFinal(pos)
+                                else:
+                                    print("el pos ya existe")
+
+
+
+                lparecidos.MostrarListaPrimeroaUltimo()
+                #print("tamLparecidos",lparecidos.tamanio())
+                if lparecidos.tamanio()>0:
+                    for f in range(Lmatrices.getLista(i).getNumColumna()):
+                        suma=0
+                        for l in range(lparecidos.tamanio()):
+                            suma= suma + int(Lmatrices.getLista(i).mostrarenfilaycolumna(int(lparecidos.iterarhasta(l)),f))
+                        #print("suma de la columna",f,"es ",suma)
+                        NmatrizR.insertMatriz(suma)
+
+                lparecidos.VaciarLista()
+                ldiferentes.VaciarLista()
+                FilaComparar.clear()
+
+            for h in range(len(flags)):
+                #print("verficando flags")
+                if flags[h] == False:
+
+                    for r in range(Lmatrices.getLista(i).getNumColumna()):
+                        #print(h)
+                        vaal = Lmatrices.getLista(i).mostrarenfilaycolumna(h, r)
+                        NmatrizR.insertMatriz(vaal)
 
 
 
 
-    def comparandoPatrones(self):
-       # print("desdecomparando")
-
-        posk=1
-        #self.ObteniendoPatrones(1).MostrarListaPrimeroaUltimo()
-        for i in range(Lmatrices.tamanio()):
-           NuevaMatrisResulado = Matriz.matrix(4, int(Lmatrices.getLista(i).getNumColumna()),Lmatrices.getLista(i).getNombreMatriz())
-           for s in range(Lmatrices.getLista(i).getNumFila()):
-               resultado = 0
-               val1 = 0
-               for m in range(Lmatrices.getLista(i).getNumColumna()):
-
-                   for j in range(self.ObteniendoPatrones(i).tamanio()):
-                       for k in range(self.ObteniendoPatrones(i).tamanio()):
-                           if self.ObteniendoPatrones(i).iterarhasta(j) == self.ObteniendoPatrones(i).iterarhasta(k) and j != k :
-                               val1 = int(Lmatrices.getLista(i).mostrarenfilaycolumna(j, m))
-                               val2 = int(Lmatrices.getLista(i).mostrarenfilaycolumna(k, m))
-                               resultado = resultado + val2
-
-                   NuevaMatrisResulado.insertMatriz(resultado + val1)
-                   resultado=0
-                   val1=0
-
-        LMatResult.addNodoalFinal(NuevaMatrisResulado)
+            LMatResult.addNodoalFinal(NmatrizR)
+            #print("tamMatResul",LMatResult.tamanio())
 
 
-    def MostrarLResultados(self):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def mostrarMatresult(self):
         for i in range(LMatResult.tamanio()):
-            print("tam Lresult ",LMatResult.tamanio())
-            print("*/*/*/*/*/*/*/*/*/*/*/*/")
-            print("Resultados de la matriz: ", LMatResult.getLista(i).getNombreMatriz())
-            print("tamaio de la matriz. filas",LMatResult.getLista(i).tamFila(),"columnas: ",LMatResult.getLista(i).getNumColumna())
-            LMatResult.getLista(i).mostrarmatriz()
+            print("Reduccion de la matri",LMatResult.getLista(i).getNombreMatriz(),"filas= ",LMatResult.getLista(i).tamFila(),"columnas ",LMatResult.getLista(i).getNumColumna())
+            for j in range(LMatResult.getLista(i).tamFila()):
+                for k in range(LMatResult.getLista(i).getNumColumna()):
+                            print(LMatResult.getLista(i).mostrarenfilaycolumna(j,k))
 
-            print("*/*/*/*/*/*/*/*/*/*/*/*/")
+
+
+#####################SECCION QUE GENERA EL GRAFO ##################
+
+    def CrearGrafo(self):
+        lNomMatrix=[]
+        d = Digraph(filename='Matrices.gv')
+        d.node("MATRICES")
+        filas=""
+        columnas=""
+
+        for i in range(Lmatrices.tamanio()):
+            with d.subgraph() as s:
+                s.attr(rank='same')
+                nombres=str(Lmatrices.getLista(i).getNombreMatriz())
+
+                s.node(nombres)
+                lNomMatrix.append(nombres)
+        for i in range (len(lNomMatrix)):
+            d.edge("MATRICES",lNomMatrix[i])
+
+        for i in range(len(lNomMatrix)):
+            for j in range(Lmatrices.tamanio()):
+                filas = str(Lmatrices.getLista(i).getNumFila())
+                columnas = str(Lmatrices.getLista(i).getNumColumna())
+            d.edge(lNomMatrix[i],"m_"+str(i)+"= "+filas)
+            d.edge(lNomMatrix[i],"n_"+str(i)+"= "+columnas)
+
+        for j in range(Lmatrices.tamanio()):
+            m2=0
+            for k in range(1):#fila
+                for m in range(Lmatrices.getLista(j).getNumColumna()):#columna
+
+                        m2=m2+1
+
+                        etiqueta=Lmatrices.getLista(j).mostrarenfilaycolumna(k, m)
+                        d.node(str(m2)+Lmatrices.getLista(j).getNombreMatriz(),etiqueta)
+
+        for i in range(Lmatrices.tamanio()):
+            m2 = 0
+            for k in range(1):
+                for m in range(Lmatrices.getLista(i).getNumColumna()):
+                    m2 = m2 + 1
+                    d.edge(str(lNomMatrix[i]), str(m2)+Lmatrices.getLista(i).getNombreMatriz())
+
+        for i in range (Lmatrices.tamanio()):
+            m2=0
+            for j in range(Lmatrices.getLista(i).getNumFila()):
+                for k in range(Lmatrices.getLista(i).getNumColumna()):
+                    m2=m2+1
+                    label=Lmatrices.getLista(i).mostrarenfilaycolumna(j, k)
+                    d.node(str(m2)+str(Lmatrices.getLista(i).getNombreMatriz()),label)
+
+        for i in range(Lmatrices.tamanio()):
+            inicio=1
+            m2=0
+            for j in range(Lmatrices.getLista(i). getNumFila()-1):
+                for k in range(Lmatrices.getLista(i).getNumColumna()):
+                    m2=m2+1
+                    inicio=str(m2)+Lmatrices.getLista(i).getNombreMatriz()
+                    f =m2+Lmatrices.getLista(i).getNumColumna()
+                    fin=str(f)+Lmatrices.getLista(i).getNombreMatriz()
+                    d.edge(inicio,fin)
+
+
+
+
+        d.view()
+
+    def ListaDematricesaDibujar(self):
+        lNomMatrix=[]
+        d = Digraph(filename='Matrices.gv')
+        d.node("MATRICES")
+        filas=""
+        columnas=""
+        print("Ingrese el Numero de la matriz a Dibujar")
+
+        for i in range(Lmatrices.tamanio()):
+            print(i+1,"_ ",Lmatrices.getLista(i).getNombreMatriz())
+
+        op=input()
+        self.CrearGrafo2(int(op)-1)
+
+    def CrearGrafo2(self,pos):
+        lNomMatrix=[]
+        d = Digraph(filename='Matrices.gv')
+        d.node("MATRICES")
+        filas=""
+        columnas=""
+        nombre=""
+
+
+        with d.subgraph() as s:
+            s.attr(rank='same')
+            nombre=str(Lmatrices.getLista(pos).getNombreMatriz())
+
+            s.node(nombre)
+
+        d.edge("MATRICES", nombre)
+
+        with d.subgraph() as sb:
+            sb.attr(rank='same')
+            filas = str(Lmatrices.getLista(pos).getNumFila())
+            columnas = str(Lmatrices.getLista(pos).getNumColumna())
+
+            sb.node("idF","m= "+filas)
+            sb.node("idC","n= "+columnas)
+        d.edge(nombre,"idF")
+        d.edge(nombre,"idC")
+
+        m2 = 0
+        for k in range(Lmatrices.getLista(pos).getNumFila()):  # fila
+            for m in range(Lmatrices.getLista(pos).getNumColumna()):  # columna
+
+                m2 = m2 + 1
+
+                etiqueta = Lmatrices.getLista(pos).mostrarenfilaycolumna(k, m)
+                d.node(str(m2) + Lmatrices.getLista(pos).getNombreMatriz(), etiqueta)
+
+        m2=0
+        for j in range(1):
+            for k in range(Lmatrices.getLista(pos).getNumColumna()):
+                m2 = m2 + 1
+                f = str(m2 )+ Lmatrices.getLista(pos).getNombreMatriz()
+
+                d.edge(nombre, f)
+
+        inicio = 1
+        m2 = 0
+        for j in range(Lmatrices.getLista(pos).getNumFila() - 1):
+            for k in range(Lmatrices.getLista(pos).getNumColumna()):
+                m2 = m2 + 1
+                inicio = str(m2) + Lmatrices.getLista(pos).getNombreMatriz()
+                f = m2 + Lmatrices.getLista(pos).getNumColumna()
+                fin = str(f) + Lmatrices.getLista(pos).getNombreMatriz()
+                d.edge(inicio, fin)
+
+        d.view()
+
+    def salidaxml(self):
+
+        top = Element('Matrices')
+
+        comment = Comment('Generado por Selvin')
+        top.append(comment)
+        """
+        child = SubElement(top, 'Matriz', nombre="loquesea", m="1", n="2")
+        child2 = SubElement(child, 'dato', x="1", y="2")
+        child2.text = '5' """
+
+
+
+        for i in range(LMatResult.tamanio()):
+            child=SubElement(top,'matriz',nombre=str(LMatResult.getLista(i).getNombreMatriz())+'_salida',n=str(LMatResult.getLista(i).tamFila()),m=str(LMatResult.getLista(i).getNumColumna()),g=str(LMatResult.getLista(i).tamFila()))
+            for j in range(LMatResult.getLista(i).tamFila()):
+                for k in range(LMatResult.getLista(i).getNumColumna()):
+                    child2= SubElement(child,'dato',x=str(j+1),y=str(k+1))
+                    child2.text = str(LMatResult.getLista(i).mostrarenfilaycolumna(j,k))
+
+        file = open("salida.xml", "w")
+        file.write(str((prettify(top))))
+
+        file.close()
+
+
+
+
+
+
+
+
+
+
+
 
 
 

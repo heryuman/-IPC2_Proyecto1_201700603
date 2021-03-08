@@ -11,6 +11,13 @@ class ListaCircularSimpl(object):
     def getVacio(self):
         if self.primero == None:
             return True
+        else:
+            return False
+
+    def VaciarLista(self):
+        self.primero=None
+        self.ultimo=None
+        self.contador=0
 
     def addInicio(self, elemento):
         nuevo = Nodo.Node(elemento)
