@@ -1,0 +1,71 @@
+digraph {
+	MATRICES
+	{
+		rank=same
+		Ejemplo
+	}
+	MATRICES -> Ejemplo
+	{
+		rank=same
+		idF [label="m= 7"]
+		idC [label="n= 4"]
+	}
+	Ejemplo -> idF
+	Ejemplo -> idC
+	"1Ejemplo" [label=2]
+	"2Ejemplo" [label=3]
+	"3Ejemplo" [label=0]
+	"4Ejemplo" [label=4]
+	"5Ejemplo" [label=0]
+	"6Ejemplo" [label=0]
+	"7Ejemplo" [label=6]
+	"8Ejemplo" [label=3]
+	"9Ejemplo" [label=3]
+	"10Ejemplo" [label=4]
+	"11Ejemplo" [label=0]
+	"12Ejemplo" [label=2]
+	"13Ejemplo" [label=1]
+	"14Ejemplo" [label=0]
+	"15Ejemplo" [label=1]
+	"16Ejemplo" [label=5]
+	"17Ejemplo" [label=0]
+	"18Ejemplo" [label=0]
+	"19Ejemplo" [label=3]
+	"20Ejemplo" [label=1]
+	"21Ejemplo" [label=0]
+	"22Ejemplo" [label=0]
+	"23Ejemplo" [label=3]
+	"24Ejemplo" [label=1]
+	"25Ejemplo" [label=2]
+	"26Ejemplo" [label=3]
+	"27Ejemplo" [label=0]
+	"28Ejemplo" [label=4]
+	Ejemplo -> "1Ejemplo"
+	Ejemplo -> "2Ejemplo"
+	Ejemplo -> "3Ejemplo"
+	Ejemplo -> "4Ejemplo"
+	"1Ejemplo" -> "5Ejemplo"
+	"2Ejemplo" -> "6Ejemplo"
+	"3Ejemplo" -> "7Ejemplo"
+	"4Ejemplo" -> "8Ejemplo"
+	"5Ejemplo" -> "9Ejemplo"
+	"6Ejemplo" -> "10Ejemplo"
+	"7Ejemplo" -> "11Ejemplo"
+	"8Ejemplo" -> "12Ejemplo"
+	"9Ejemplo" -> "13Ejemplo"
+	"10Ejemplo" -> "14Ejemplo"
+	"11Ejemplo" -> "15Ejemplo"
+	"12Ejemplo" -> "16Ejemplo"
+	"13Ejemplo" -> "17Ejemplo"
+	"14Ejemplo" -> "18Ejemplo"
+	"15Ejemplo" -> "19Ejemplo"
+	"16Ejemplo" -> "20Ejemplo"
+	"17Ejemplo" -> "21Ejemplo"
+	"18Ejemplo" -> "22Ejemplo"
+	"19Ejemplo" -> "23Ejemplo"
+	"20Ejemplo" -> "24Ejemplo"
+	"21Ejemplo" -> "25Ejemplo"
+	"22Ejemplo" -> "26Ejemplo"
+	"23Ejemplo" -> "27Ejemplo"
+	"24Ejemplo" -> "28Ejemplo"
+}

@@ -74,6 +74,16 @@ class matrix():
 
        return  valor
 
+    def mostrarenfilaycolumna2(self, fila, columna):
+        valor = ""
+        for i in range((self.getNumFila())):
+            # print()
+            for j in range((self.getNumColumna())):
+
+                if i == fila and j == columna:
+                    # print(,"mostrar en filay col")
+                    valor = self.Lfila.getLista(fila).retornaren(columna)
+                    print(valor,end="|")
 
 
 
