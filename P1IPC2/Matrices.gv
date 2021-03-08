@@ -5,13 +5,16 @@ digraph {
 		Ejemplo
 	}
 	MATRICES -> Ejemplo
-	{
-		rank=same
-		idF [label="m= 7"]
-		idC [label="n= 4"]
-	}
-	Ejemplo -> idF
-	Ejemplo -> idC
+	Ejemplo -> "m_0= 7"
+	Ejemplo -> "n_0= 4"
+	"1Ejemplo" [label=2]
+	"2Ejemplo" [label=3]
+	"3Ejemplo" [label=0]
+	"4Ejemplo" [label=4]
+	Ejemplo -> "1Ejemplo"
+	Ejemplo -> "2Ejemplo"
+	Ejemplo -> "3Ejemplo"
+	Ejemplo -> "4Ejemplo"
 	"1Ejemplo" [label=2]
 	"2Ejemplo" [label=3]
 	"3Ejemplo" [label=0]
@@ -40,10 +43,6 @@ digraph {
 	"26Ejemplo" [label=3]
 	"27Ejemplo" [label=0]
 	"28Ejemplo" [label=4]
-	Ejemplo -> "1Ejemplo"
-	Ejemplo -> "2Ejemplo"
-	Ejemplo -> "3Ejemplo"
-	Ejemplo -> "4Ejemplo"
 	"1Ejemplo" -> "5Ejemplo"
 	"2Ejemplo" -> "6Ejemplo"
 	"3Ejemplo" -> "7Ejemplo"

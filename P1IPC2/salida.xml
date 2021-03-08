@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<Matrices>
+  <!--Generado por Selvin-->
+  <matriz nombre="Ejemplo_salida" n="3" m="4" g="3">
+    <dato x="1" y="1">7</dato>
+    <dato x="1" y="2">10</dato>
+    <dato x="1" y="3">0</dato>
+    <dato x="1" y="4">10</dato>
+    <dato x="2" y="1">0</dato>
+    <dato x="2" y="2">0</dato>
+    <dato x="2" y="3">12</dato>
+    <dato x="2" y="4">5</dato>
+    <dato x="3" y="1">1</dato>
+    <dato x="3" y="2">0</dato>
+    <dato x="3" y="3">1</dato>
+    <dato x="3" y="4">5</dato>
+  </matriz>
+</Matrices>

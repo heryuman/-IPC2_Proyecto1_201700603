@@ -20,19 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f597217-c1ad-421d-bf2e-db3eab00f37a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/-IPC2_Proyecto1_201700603.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/P1IPC2/ElementTree_pretty.py" beforeDir="false" afterPath="$PROJECT_DIR$/P1IPC2/ElementTree_pretty.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/P1IPC2/EnsayoProyecto1/ArticuloEnsayo-IPC2-lab_201700603.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/P1IPC2/LeerXml.py" beforeDir="false" afterPath="$PROJECT_DIR$/P1IPC2/LeerXml.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/P1IPC2/ListaCircularSimple.py" beforeDir="false" afterPath="$PROJECT_DIR$/P1IPC2/ListaCircularSimple.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/P1IPC2/Matriz.py" beforeDir="false" afterPath="$PROJECT_DIR$/P1IPC2/Matriz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/P1IPC2/Nodo.py" beforeDir="false" afterPath="$PROJECT_DIR$/P1IPC2/Nodo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/P1IPC2/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/P1IPC2/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/P1IPC2/salida.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
