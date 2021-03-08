@@ -27,7 +27,14 @@ class LeerXml(object):
         if Lmatrices.getVacio()==False:
             Lmatrices.VaciarLista()
             LBinarais.VaciarLista()
+<<<<<<< HEAD
             LMatResult.VaciarLista()
+=======
+
+
+            LMatResult.VaciarLista()
+
+>>>>>>> Release4
 
 
 
