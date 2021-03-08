@@ -19,18 +19,7 @@ class ListaCircularSimpl(object):
         self.ultimo=None
         self.contador=0
 
-    def addInicio(self, elemento):
-        nuevo = Nodo.Node(elemento)
-        if self.getVacio() == True:
-            self.primero = self.ultimo =nuevo
-            self.ultimo.pSig = self.primero
 
-        else:
-            self.ultimo.pSig = nuevo
-            nuevo.pSig = self.primero
-            self.primero = nuevo
-
-        self.contador += 1
 
 
     def addNodoalFinal(self,elemento):
@@ -215,59 +204,7 @@ class ListaCircularSimpl(object):
 
 
 
-    def remove(self,d):
 
-        """Se elimina el nodo que tenga el dato d"""
-
-        #Al nodo actual se le asigna el primer nodo
-
-        nodoActual = self.primero
-
-        #Y al nodo anterior se le asigna None.
-
-        nodoAnterior = None
-
-
-
-        #Mientras exista el nodo actual-
-
-        while nodoActual:
-
-            #Si el dato de nodo actual es igual al dato que se esta buscando.
-
-            if nodoActual.dato == d:
-
-                #Si existe nodo anterior
-
-                if nodoAnterior:
-
-                    #Se asigna  al apuntador proximo del nodo anterior el proximo de nodo actual
-
-                    nodoAnterior.proximo = nodoActual.proximo
-
-                else:
-
-                    #A primero se le asigna el apuntador al proximo nodo del nodo actual
-
-                    self.__primero = nodoActual.proximo
-
-                #En cualquiera de los dos casos se decrementa el tamagno de la lista.
-
-                self.__tamagno -= 1
-
-                #Devuelve True por que se elimino.
-
-                return True
-
-            else:
-
-                #Se asigna al nodo anterior el nodo actual
-
-                nodoAnterior = nodoActual
-
-                #Se asigna al nodo actual, el nodo proximo del nodo actual
-
-                nodoActual = nodoActual.proximo
     def getLista(self, limite):
         i = 0
         if self.getVacio() == True:
@@ -292,11 +229,3 @@ class ListaCircularSimpl(object):
             else:
                 print ("intervalo incorrecto")
 
-#lista = ListaCircularSimpl()
-
-#lista.addInicio(8)
-#lista.addInicio(9)
-#print (lista)
-
-#for d in lista.iterar():
- #   print d

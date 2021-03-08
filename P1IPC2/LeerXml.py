@@ -27,13 +27,17 @@ class LeerXml(object):
         if Lmatrices.getVacio()==False:
             Lmatrices.VaciarLista()
             LBinarais.VaciarLista()
+<<<<<<< HEAD
+            LMatResult.VaciarLista()
+=======
 
 
             LMatResult.VaciarLista()
 
+>>>>>>> Release4
 
-        #nombre = doc.getElementsByTagName("nombre")[1]
-        #print(nombre.firstChild.data)
+
+
 
         CONTMAT = 0
         matrices = doc.getElementsByTagName("matriz")
