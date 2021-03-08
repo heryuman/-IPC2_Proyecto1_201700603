@@ -59,7 +59,7 @@ class matrix():
 
               #if self.Lfila.getLista(i).iterarhasta(j) != None:
 
-                  print(self.Lfila.getLista(i).iterarhasta(j),end="|")
+                  print(self.Lfila.getLista(i).iterarhasta(j),end="||")
 
     def mostrarenfilaycolumna(self, fila, columna):
        valor=""

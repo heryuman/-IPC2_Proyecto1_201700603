@@ -74,7 +74,7 @@ def menu2():
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
-   print("Hi, {0}".format(name))  # Press Ctrl+F8 to toggle the breakpoint.
+ """  print("Hi, {0}".format(name))  # Press Ctrl+F8 to toggle the breakpoint.
    lector = LeerXml.LeerXml("C:/Users/ASUS/Documents/ProyectosIPCPS2021/matrixami.xml")
    lector.readPath()
    lector.imprimirLmatrices()
@@ -87,7 +87,7 @@ def print_hi(name):
    #lector.prettify()
    #lector.MostrarLResultados()
    #lector.ListaDematricesaDibujar()
-   #print( lector.)
+   #print( lector.)"""
 
 
 

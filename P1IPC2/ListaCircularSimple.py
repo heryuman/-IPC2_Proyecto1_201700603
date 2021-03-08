@@ -19,18 +19,7 @@ class ListaCircularSimpl(object):
         self.ultimo=None
         self.contador=0
 
-    def addInicio(self, elemento):
-        nuevo = Nodo.Node(elemento)
-        if self.getVacio() == True:
-            self.primero = self.ultimo =nuevo
-            self.ultimo.pSig = self.primero
 
-        else:
-            self.ultimo.pSig = nuevo
-            nuevo.pSig = self.primero
-            self.primero = nuevo
-
-        self.contador += 1
 
 
     def addNodoalFinal(self,elemento):
